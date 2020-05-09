@@ -1,0 +1,4 @@
+{{$context := .}}{{$resource := .Resource}}{{$metas := convert_sections_to_metas $resource index_sections}}{{$count := len $metas}}{{range $index, $meta := $metas}}{{meta_label $meta}}{{if is_not_last $index $count}},{{end}}{{end}}
+{{range $result := .Result}}{{range $index, $meta := $metas}}{{ render_meta $result $meta}}{{if is_not_last $index $count}},{{end}}{{end}}
+{{end}}
+

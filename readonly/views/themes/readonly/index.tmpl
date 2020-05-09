@@ -1,0 +1,110 @@
+<script src="{{.Resource.GetAdmin.GetRouter.Prefix}}/assets/javascripts/filedownload.js?theme=readonly"></script>
+<style>
+  .readonly-filters .disabled {
+    background-color: grey !important;
+  }
+  .readonly-filters advanced-filter-group label {
+      margin: 0px 0px 0px 2px !important;
+  }
+  .qor-field__flexbox .qor-field__edit {
+    margin-top: 0px;
+  }
+  .qor-field__datetimepicker {
+    width: 112px;
+  }
+  .qor-field__datetimepicker button[data-toggle='qor.datepicker']{
+    left: 120px;
+    top: 14px;
+  }
+  .qor-field__datetimepicker button[data-toggle='qor.timepicker']{
+    left: 150px;
+    top: 14px;
+  }
+  .qor-field[type='filter-datetime'] {
+    display: inline-block;
+    width: 400px;
+  }
+  .qor-field[type='filter-datetime'] advanced-filter-group {
+    width: 168px;
+  }
+  .readonly-filters {
+    margin: 0 25px 0 25px;
+  }
+  .readonly-filters .qor-field__label {
+    position: absolute;
+  }
+  .readonly-filters advanced-filter-group[type='filter-selectone'] .qor-field__label {
+    position: relative;
+  }
+  .readonly-filters advanced-filter-group[type='buttons'] {
+    width: 250px;
+    margin-left: 20px;
+  }
+  .readonly-filters advanced-filter-group[type='buttons'] .mdl-button--raised.mdl-button--colored {
+    margin-top: -14px;
+  }
+  .readonly-filters advanced-filter-group {
+    width: 22%;
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+  }
+  .readonly-filters .submit {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .readonly-filters advanced-filter-group label {
+    margin: 0px 0px 5px 2px;
+  }
+</style>
+{{$filters := get_filters}}
+{{if $filters}}
+  <div class="readonly-filters">
+    {{if len saved_filters}}
+      <div class="qor-advanced-filter__savedfilter">
+        <button class="mdl-button qor-advanced-filter__toggle">{{t "qor_admin.filter.saved_filter" "Saved Filter"}}</button>
+        <ul style="display:none;" advanced-search-toggle>
+          {{range $filter := saved_filters}}
+            <li>
+              <a href="{{$filter.URL}}">{{$filter.Name}}</a>
+              <button class="mdl-button mdl-button--icon qor-advanced-filter__delete" style="display: none;" data-filter-name="{{$filter.Name}}">
+                <i class="material-icons">close</i>
+              </button>
+            </li>
+          {{end}}
+        </ul>
+      </div>
+    {{end}}
+
+    <form method="GET" class="ignore-dirtyform">
+      {{range $filter := $filters}}
+        {{render_filter $filter}}
+      {{end}}
+      <advanced-filter-group class="qor-field clearfix" type="buttons">
+      <div class="submit">
+        {{if enable_export .Resource }}
+          <a href="{{.Resource.GetAdmin.GetRouter.Prefix}}/{{.Resource.ToParam}}/export" style="width: 80px" class="js-export mdl-button mdl-button--colored mdl-button--raised">{{t "qor_admin.filter.export" "Export"}}</a>
+        {{end}}
+        <button style="margin-left: 12px; width:112px" type="submit" class="mdl-button mdl-button--colored mdl-button--raised">{{t "qor_admin.filter.apply" "Apply"}}</button>
+      </div>
+      </advanced-filter-group>
+    </form>
+  </div>
+{{end}}
+
+<div class="qor-page__body">
+  {{render "shared/flashes"}}
+  {{render "shared/errors"}}
+    {{if has_create_permission .Resource}}
+    <a class="mdl-button mdl-button--fab mdl-button--primary qor-button--new" href="{{new_resource_path .Resource}}" data-url="{{new_resource_path .Resource}}">
+      <i class="material-icons">add</i>
+    </a>
+    {{end}}
+
+  <div class="qor-table-container">
+    {{render "index/table"}}
+  </div>
+
+  {{render "index/pagination"}}
+</div>
