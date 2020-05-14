@@ -16,7 +16,7 @@ import (
 var disabledExportResources []*admin.Resource
 
 func Setup(adm *admin.Admin, cfg ...interface{}) {
-	adm.RegisterViewPath("gitlab.com/hashtech/common/admin_common/readonly/views")
+	adm.RegisterViewPath("github.com/ttlv/common_utils/readonly/views")
 	for _, res := range adm.GetResources() {
 		if res.GetTheme("readonly") != nil {
 			adm.GetRouter().Get(fmt.Sprintf("/%v/export", res.ToParam()), func(c *admin.Context) {
