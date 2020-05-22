@@ -11,9 +11,9 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/qor/admin"
 	"github.com/qor/qor"
-	"gitlab.com/hashtech/common/admin_common/readonly"
-	"gitlab.com/hashtech/common/testingtool"
-	common_utils "gitlab.com/hashtech/common/utils"
+	"github.com/ttlv/common_utils/readonly"
+	"github.com/ttlv/common_utils/testingtool"
+	"github.com/ttlv/common_utils/utils"
 )
 
 var (
@@ -49,7 +49,7 @@ func setup(max ...interface{}) {
 	DB.AutoMigrate(&Trade{}, &Order{}, &Exchange{})
 
 	if os.Getenv("KEEP_DB") != "true" {
-		common_utils.RunSQL(DB, `
+		utils.RunSQL(DB, `
 		  TRUNCATE TABLE trades;
           TRUNCATE TABLE exchanges;
           INSERT exchanges (name) VALUES ('测试1');
@@ -59,7 +59,7 @@ func setup(max ...interface{}) {
 		`)
 	}
 	/*for i := 0; i < 9900; i++ {
-		common_utils.RunSQL(DB, `
+		utils.RunSQL(DB, `
 		  INSERT trades (market, price) VALUES ('btceth', 1000)
 		`)
 	}*/
