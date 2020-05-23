@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -48,6 +47,5 @@ func Post(url string, body interface{}, params url.Values, headers map[string]st
 	res, _ := client.Do(req)
 	defer res.Body.Close()
 	byteBody, _ := ioutil.ReadAll(res.Body)
-	fmt.Println(string(byteBody))
 	return string(byteBody), nil
 }
