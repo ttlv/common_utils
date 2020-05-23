@@ -1,3 +1,5 @@
+# github.com/BurntSushi/toml v0.3.1
+github.com/BurntSushi/toml
 # github.com/PuerkitoBio/goquery v1.5.1
 ## explicit
 github.com/PuerkitoBio/goquery
@@ -24,6 +26,11 @@ github.com/go-redis/redis/internal/hashtag
 github.com/go-redis/redis/internal/pool
 github.com/go-redis/redis/internal/proto
 github.com/go-redis/redis/internal/util
+# github.com/go-sql-driver/mysql v1.5.0
+github.com/go-sql-driver/mysql
+# github.com/golang/mock v1.1.1
+## explicit
+github.com/golang/mock/gomock
 # github.com/golang/protobuf v1.4.2
 ## explicit
 github.com/golang/protobuf/jsonpb
@@ -55,15 +62,19 @@ github.com/grpc-ecosystem/go-grpc-middleware/testing
 github.com/grpc-ecosystem/go-grpc-middleware/testing/testproto
 # github.com/jinzhu/configor v1.2.0
 ## explicit
+github.com/jinzhu/configor
 # github.com/jinzhu/gorm v1.9.12
 ## explicit
 github.com/jinzhu/gorm
+github.com/jinzhu/gorm/dialects/mysql
 # github.com/jinzhu/inflection v1.0.0
 github.com/jinzhu/inflection
 # github.com/jinzhu/now v1.0.1
 github.com/jinzhu/now
 # github.com/konsorten/go-windows-terminal-sequences v1.0.3
 github.com/konsorten/go-windows-terminal-sequences
+# github.com/kr/pretty v0.1.0
+## explicit
 # github.com/mattn/go-colorable v0.1.4
 github.com/mattn/go-colorable
 # github.com/mattn/go-isatty v0.0.11
@@ -225,5 +236,7 @@ google.golang.org/protobuf/runtime/protoimpl
 google.golang.org/protobuf/types/known/anypb
 google.golang.org/protobuf/types/known/durationpb
 google.golang.org/protobuf/types/known/timestamppb
+# gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127
+## explicit
 # gopkg.in/yaml.v2 v2.3.0
 gopkg.in/yaml.v2
