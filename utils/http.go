@@ -45,7 +45,7 @@ func Post(url string, body interface{}, params url.Values, headers map[string]st
 	//http client
 	client := &http.Client{}
 	resp, err := client.Do(req)
-	if resp.Body != nil {
+	if resp != nil {
 		defer resp.Body.Close()
 		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
@@ -72,7 +72,7 @@ func Get(rawUrl string, params url.Values) (result string, err error) {
 		urlPath = rawUrl
 	}
 	resp, err := http.Get(urlPath)
-	if resp.Body != nil {
+	if resp != nil {
 		defer resp.Body.Close()
 		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
