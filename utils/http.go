@@ -52,13 +52,18 @@ func Post(url string, body interface{}, params url.Values, headers map[string]st
 
 func Get(rawUrl string, params url.Values) (result string, err error) {
 	var (
-		Url *url.URL
+		Url     *url.URL
+		urlPath string
 	)
-	if Url, err = url.Parse(rawUrl); err != nil {
-		return "", err
+	if params != nil {
+		if Url, err = url.Parse(rawUrl); err != nil {
+			return "", err
+		}
+		Url.RawQuery = params.Encode()
+		urlPath = Url.String()
+	} else {
+		urlPath = rawUrl
 	}
-	Url.RawQuery = params.Encode()
-	urlPath := Url.String()
 	resp, err := http.Get(urlPath)
 	defer resp.Body.Close()
 	if err != nil {
