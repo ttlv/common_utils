@@ -44,13 +44,17 @@ func Post(url string, body interface{}, params url.Values, headers map[string]st
 	}
 	//http client
 	client := &http.Client{}
-	res, err := client.Do(req)
-	if err != nil {
-		return "", err
+	resp, err := client.Do(req)
+	if resp.Body != nil {
+		defer resp.Body.Close()
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			return "", err
+		}
+		return string(body), nil
 	}
-	defer res.Body.Close()
-	byteBody, _ := ioutil.ReadAll(res.Body)
-	return string(byteBody), nil
+
+	return "", err
 }
 
 func Get(rawUrl string, params url.Values) (result string, err error) {
@@ -68,13 +72,14 @@ func Get(rawUrl string, params url.Values) (result string, err error) {
 		urlPath = rawUrl
 	}
 	resp, err := http.Get(urlPath)
-	defer resp.Body.Close()
-	if err != nil {
-		return "", err
+	if resp.Body != nil {
+		defer resp.Body.Close()
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			return "", err
+		}
+		return string(body), nil
 	}
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return "", err
-	}
-	return string(body), nil
+
+	return "", err
 }
