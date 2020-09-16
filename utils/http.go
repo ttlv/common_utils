@@ -49,3 +49,24 @@ func Post(url string, body interface{}, params url.Values, headers map[string]st
 	byteBody, _ := ioutil.ReadAll(res.Body)
 	return string(byteBody), nil
 }
+
+func Get(rawUrl string, params url.Values) (result string, err error) {
+	var (
+		Url *url.URL
+	)
+	if Url, err = url.Parse(rawUrl); err != nil {
+		return "", err
+	}
+	Url.RawQuery = params.Encode()
+	urlPath := Url.String()
+	resp, err := http.Get(urlPath)
+	defer resp.Body.Close()
+	if err != nil {
+		return "", err
+	}
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+	return string(body), nil
+}
