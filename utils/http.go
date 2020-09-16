@@ -44,7 +44,10 @@ func Post(url string, body interface{}, params url.Values, headers map[string]st
 	}
 	//http client
 	client := &http.Client{}
-	res, _ := client.Do(req)
+	res, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
 	defer res.Body.Close()
 	byteBody, _ := ioutil.ReadAll(res.Body)
 	return string(byteBody), nil
