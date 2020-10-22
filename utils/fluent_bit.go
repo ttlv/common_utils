@@ -12,7 +12,7 @@ var f mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Message) {
 }
 
 func PushToFluentBit(url string, topic, clientID, message string) error {
-	opts := mqtt.NewClientOptions().AddBroker("tcp://0.0.0.0:1883").SetClientID(clientID)
+	opts := mqtt.NewClientOptions().AddBroker(url).SetClientID(clientID)
 	opts.SetKeepAlive(5 * time.Second)
 
 	// 这里需要注入一个client收到消息后对消息处理的方法
