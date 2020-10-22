@@ -7,6 +7,7 @@ require (
 	github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535 // indirect
 	github.com/aws/aws-sdk-go v1.31.3 // indirect
 	github.com/disintegration/imaging v1.6.2 // indirect
+	github.com/eclipse/paho.mqtt.golang v1.2.0
 	github.com/fatih/color v1.9.0
 	github.com/go-redis/redis v6.15.8+incompatible
 	github.com/golang/mock v1.1.1
