@@ -1,18 +1,11 @@
 package utils
 
 import (
-	"github.com/sirupsen/logrus"
-
 	"github.com/eclipse/paho.mqtt.golang"
 )
 
 type MQTTClient struct {
 	MC mqtt.Client
-}
-
-// 订阅回调
-func subCallBackFunc(client mqtt.Client, msg mqtt.Message) {
-	logrus.Infof("Subscribe: Topic is [%s]; msg is [%s]\n", msg.Topic(), string(msg.Payload()))
 }
 
 func NewMQClient(broker, user, passwd string) (err error, client MQTTClient) {
@@ -28,7 +21,7 @@ func NewMQClient(broker, user, passwd string) (err error, client MQTTClient) {
 	return
 }
 
-func (mc *MQTTClient) Subscribe(topic string) {
+func (mc *MQTTClient) Subscribe(topic string, subCallBackFunc func(client mqtt.Client, msg mqtt.Message)) {
 	mc.MC.Subscribe(topic, 0x00, subCallBackFunc)
 }
 
